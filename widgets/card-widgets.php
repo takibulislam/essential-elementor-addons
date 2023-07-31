@@ -110,15 +110,6 @@ class essential_elementor_card_Widget extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
-			'card_url',
-			[
-				'label' => esc_html__( 'Profile Url', 'essential-elementor-widgets' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'input_type' => 'url',
-				'placeholder' => esc_html__( 'https://your-link.com', 'elementor-oembed-widget' ),
-			]
-		);
-		$this->add_control(
 			'card_title',
 			[
 				'label' => esc_html__( 'My Name', 'essential-elementor-widgets' ),
@@ -137,6 +128,15 @@ class essential_elementor_card_Widget extends \Elementor\Widget_Base {
 			]
 		);
 		$this->add_control(
+			'card_url',
+			[
+				'label' => esc_html__( 'Profile Url', 'essential-elementor-widgets' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'input_type' => 'url',
+				'placeholder' => esc_html__( 'https://your-link.com', 'elementor-oembed-widget' ),
+			]
+		);
+		$this->add_control(
 			'card_empty',
 			[
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
@@ -145,6 +145,93 @@ class essential_elementor_card_Widget extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		/******************
+		Style Section 
+		**************/
+		$this->start_controls_section(
+			'style_section',
+			[
+				'label' => esc_html__( 'Style', 'essential-elementor-widgets' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		//*Controls for title*/
+		$this->add_control(
+			'title_option',
+			[
+				'label' => esc_html__( 'Title Option', 'essential-elementor-widgets ' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'selectors' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'title_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-elementor-widgets ' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#f00',
+				'selectors' => [
+					'{{WRAPPER}} h3' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				"name" => "title_typography",
+				"selector"	=> "{{WRAPPER}} h3",
+			]
+			);
+		
+			$this->add_group_control(
+				\Elementor\Group_Control_Text_Shadow::get_type(),
+				[
+					'name' => 'text_shadow',
+					'selector' => '{{WRAPPER}} h3',
+				]
+			);
+		$this->add_control(
+			'description_option',
+			[
+				'label' => esc_html__( 'Description Option', 'essential-elementor-widgets ' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'selectors' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'description_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-elementor-widgets ' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#f00',
+				'selectors' => [
+					'{{WRAPPER}} .card_description' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				"name" => "description_typography",
+				"selector"	=> "{{WRAPPER}} .card_description",
+			]
+			);
+		
+			$this->add_group_control(
+				\Elementor\Group_Control_Text_Shadow::get_type(),
+				[
+					'name' => 'text_shadow',
+					'selector' => '{{WRAPPER}} .card_description',
+				]
+			);
+		
+
+		$this->end_controls_section();
+
 
 	}
     /**
